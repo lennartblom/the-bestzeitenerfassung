@@ -1,4 +1,3 @@
-
 function getItemKey(id) {
   switch (id) {
     case NAME_ID:
@@ -26,12 +25,28 @@ function databaseTestFunction(e) {
   for (let i = 0; i < itemResponses.length; i++) {
     let itemResponse = itemResponses[i];
     let itemKey = getItemKey(itemResponse.getItem().getId());
-    
+
     data[itemKey] = itemResponse.getResponse();
   }
 
+  let name = data["name"];
+  let userData = {};
+
+  userData["gender"] = data["gender"];
+  userData["email"] = data["email"];
+  userData["age"] = data["age"];
+
+  let distanceType = data["distance"];
+
+  userData[distanceType] = [];
+  let pr_entry = {
+    "result": data["result"]
+  };
+  userData[distanceType].push(pr_entry)
+
+
   store.updateData(
-    e.response.getId(),
-    data
+    name,
+    userData
   );
 }
